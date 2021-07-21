@@ -1,35 +1,27 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+
+import { UIShellModule } from 'carbon-components-angular';
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './header/header.component';
 
 describe('AppComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ],
-    }).compileComponents();
-  });
+	beforeEach(waitForAsync(() => {
+		TestBed.configureTestingModule({
+			declarations: [
+				AppComponent,
+				HeaderComponent
+			],
+			imports: [
+				RouterTestingModule,
+				UIShellModule
+			]
+		}).compileComponents();
+	}));
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'ng-v12-base-app'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('ng-v12-base-app');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('ng-v12-base-app app is running!');
-  });
+	it('should create the app', waitForAsync(() => {
+		const fixture = TestBed.createComponent(AppComponent);
+		const app = fixture.debugElement.componentInstance;
+		expect(app).toBeTruthy();
+	}));
 });
